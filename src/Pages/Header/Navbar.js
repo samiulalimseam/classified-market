@@ -1,19 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthContextProvider';
 import logo from './logo.svg'
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    const {user,logOut}= useContext(AuthContext);
+    const handleSignout = () =>{
+        logOut()
+    }
     const menuitems = <>
         <li> <Link to={`/`} >Home</Link> </li>
-        <li> <Link to={`/login`} >Login</Link> </li>
+        {!user?.uid  && <li><Link to={'/login'}>Login</Link></li>   }
+        {user?.uid  && <li><Link to={`/`} onClick={handleSignout}>SignOut</Link></li>   }
         <li> <Link to={`/dashboard`} >Dashboard</Link> </li>
     
     </>
     return (
-        <div>
-            <div className=" bg-accent">
+        <div className='w-full'>
+            <div className=" bg-accent w-full">
 
-            <div className="navbar container m-auto">
+            <div className="navbar w-full container m-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -25,7 +32,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <img className='w-40' src={logo} alt="" />
+                    <img onClick={()=> navigate('/')} className='w-40 cursor-pointer' src={logo} alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0 text-white">
@@ -35,7 +42,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to={`/`} className="btn btn-primary">Post Your Ad</Link>
+                    <Link to={`/`} className="btn md:btn-md btn-sm btn-primary">Post Your Ad</Link>
                 </div>
             </div>
             </div>

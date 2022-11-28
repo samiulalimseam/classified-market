@@ -2,15 +2,22 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import './SignUp.css';
-import AuthContext from '../../Context/AuthContextProvider';
+import  { AuthContext } from '../../Context/AuthContextProvider';
 
 
 const SignUp = () => {
-    
+    const {createUser,updateUser} = useContext(AuthContext);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
     const handleSignUp = data => {
-        console.log(data);
+        createUser(data.email, data.password)
+        .then(res=> {
+            console.log(res.user)
+            updateUser({displayName:data.name})
+            .then(res=> console.log(res))
+            .catch(err=> console.error(err))
+        })
+        .catch(err=>console.error(err))
     }
     return (
         <div className='w-96 md:w-[800px] m-auto'>
@@ -21,7 +28,7 @@ const SignUp = () => {
                     <div className="text-center lg:text-left">
                         <h1 className="text-5xl font-light text-secondary"><strong>
                         SignUp now!</strong> </h1>
-                        <p className="py-6">Sign up on <span className="text-lg font-bold text-accent">Saveyou</span>
+                        <p className="py-6">Sign up on <span className="text-lg font-bold text-accent">Saveyou </span>
                             The largest marketplace in Bangladesh
                             Start posting your own ads.
                             Mark ads as favorite and view them later.

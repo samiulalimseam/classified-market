@@ -54,7 +54,7 @@ const Login = () => {
                                 
                             </div>
                         </form>
-                        <button onClick={handleGoogleLogin} className="btn  btn-circle m-auto mb-3"><span className='text-xl'><FcGoogle></FcGoogle></span></button>
+                        <button onClick={handleGoogleLogin} className="btn  btn-secondary  btn-circle m-auto mb-3"><span className='text-xl'><FcGoogle></FcGoogle></span></button>
                                 <p className="text-sm my-1 font-light text-center mb-3">Dont have an account? <Link className='text-accent font-bold' to={`/signup`}>SignUp Now</Link></p>
                     </div>
                 </div>
