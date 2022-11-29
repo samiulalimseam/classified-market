@@ -5,9 +5,10 @@ import './ads.css';
 import ProductCard from '../ProductCard/ProductCard';
 import BookingModal from '../BookingModal/BookingModal';
 import { AuthContext } from '../../Context/AuthContextProvider';
+import LoadingSpinner from '../../Routes/LoadingSpinner';
 
 const LatestAds = ({products}) => {
-  const {user}= useContext(AuthContext);
+  const {user,loading, setLoading}= useContext(AuthContext);
     const [product,setProduct]= useState({});
  
 if(!user?.email){
@@ -22,7 +23,10 @@ if(user?.email){
       <div className=" carousel  carousel-horizontal flex flex-row-reverse overflow-x-scroll scroll-auto py-5  rounded-box">
         {
           products.map(product => {
-            return <ProductCard key={product._id} setProduct={setProduct} product={product} ></ProductCard>
+            
+
+              return <ProductCard key={product._id} setProduct={setProduct} product={product} ></ProductCard>
+            
           })
           
         }

@@ -1,10 +1,8 @@
-import { format } from 'date-fns';
 import React from 'react';
 
-const ProductData = ({ product }) => {
+const OrderData = ({order}) => {
     return (
-       
-            <tr className='duration-1000'>
+        <tr className='duration-1000'>
                 <th>
                     <label>
                         <input type="checkbox" className="checkbox" />
@@ -14,27 +12,26 @@ const ProductData = ({ product }) => {
                     <div className="flex items-center space-x-3">
                         <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
-                                <img src={product.img} alt="Avatar Tailwind CSS Component" />
+                                <img src={order.productImg} alt="Avatar Tailwind CSS Component" />
                             </div>
                         </div>
                         <div>
-                            <div className="font-bold">{product.title.slice(0,16)}</div>
-                            <div className="text-sm opacity-50">{product.location.split('-')[1]}</div>
+                            <div className="font-bold">{order._id.slice(16,order._id.length)}</div>
+                            <div className="text-sm opacity-50">{order.productLocation.split('-')[1]}</div>
                         </div>
                     </div>
                 </td>
                 <td>
-                {product.seller}
+                {order.seller}
                     <br />
                     <span className="badge badge-ghost badge-sm">Not Verified</span>
                 </td>
-                <td>{format(new Date(product.datePosted),"PP")}</td>
+                <td></td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">Price: {product.price} <br /> Sale: {product.salePrice}</button>
+                    <button className="btn btn-ghost btn-xs">Price: {order.price} <br /> Sale: {order.salePrice}</button>
                 </th>
             </tr>
-        
     );
 };
 
-export default ProductData;
+export default OrderData;

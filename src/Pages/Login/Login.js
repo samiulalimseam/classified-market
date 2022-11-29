@@ -1,20 +1,68 @@
-import React, { useCallback, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useContext, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Context/AuthContextProvider';
 import {FcGoogle} from "react-icons/fc";
 
 
 const Login = () => {
-    const {setNewTitle, googleLogin} =useContext(AuthContext);
+    const {setNewTitle,setAccount, signIn, googleLogin,user} =useContext(AuthContext);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const location = useLocation();
+    const navigate = useNavigate();
+
     setNewTitle('Login- SaveYou')
-    const handleLogin = data => {
+    const from = location.state?.from?.pathname || '/';
+
+    const inserUserToDb = (user)=>{
+        fetch(`http://localhost:5000/addUser`,{
+            method:"POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        }).then(res=> {
+            console.log(res)
+            console.log('Success')
+            setAccount(user)
+        }).catch(err=>console.log(err))
         
     }
+
+    const handleLogin = data => {
+        signIn(data.email, data.password)
+        .then(()=> {
+            
+            setTimeout(()=>{
+                navigate(from, {replace: true})
+            },500)
+        })
+        .catch(err=>console.log(err))
+    }
+   
     const handleGoogleLogin = ()=>{
         googleLogin()
-        .then(res=> console.log(res))
+        .then(result => {
+            {
+                // insert user data to DataBAse
+                console.log(result.user);
+                const userToInsert = {
+                        name: result.user?.displayName,
+                        email: result.user?.email,
+                        uid: result.user?.uid,
+                        phone: '',
+                        acType: "Buyer",
+                        img: result.user?.photoURL
+                }
+                console.log('Data=',userToInsert);
+                inserUserToDb(userToInsert);
+            }
+            setTimeout(()=>{
+                
+                navigate(from, {replace: true})
+            },3000)
+        })
+        .catch(err=>console.log(err))
     }
     return (
         <div className='w-96 md:w-[800px] m-auto'>

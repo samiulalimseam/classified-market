@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FcOvertime, FcShipped } from 'react-icons/fc'
 import { BsFillHandIndexThumbFill, BsFillSuitHeartFill, BsFillTagFill, BsPinMapFill } from 'react-icons/bs'
 import { format } from 'date-fns';
 import BookingModal from '../BookingModal/BookingModal';
+import { AuthContext } from '../../Context/AuthContextProvider';
+import LoadingSpinner from '../../Routes/LoadingSpinner';
 
 const ProductCard = ({ product, setProduct, setCardProduct }) => {
+  const {loading}= useContext(AuthContext);
   const propPass = (props)=>{
     if(setProduct){
 
@@ -14,6 +17,7 @@ const ProductCard = ({ product, setProduct, setCardProduct }) => {
       setCardProduct(props)
     }
   }
+  
   return (
     <div className='hover:shadow-xl  rounded-xl duration-500 shadow mx-2 w-96 md:w-56 m-auto my-2   p-2'>
       <div className="carousel-item w-96 md:w-56 tohover ">

@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+
 import React, { createContext, useEffect, useState } from 'react';
 import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateCurrentUser, updateProfile} from 'firebase/auth';
 import app from '..//Firebase/firebase.config'
@@ -7,12 +9,26 @@ const auth = getAuth(app);
 
 export const AuthContextProvider = ({children}) => {
     const [user,setUser] = useState({});
+     const [account,setAccount] = useState({});
     const [loading,setLoading] = useState(true);
     const [newTitle,setNewTitle] = useState('Home');
     const googleProvider = new GoogleAuthProvider() ;
-    const abc = 'Samiul';
+
     document.title = newTitle;
     
+    
+    const {data: accData = {}} = useQuery({
+        queryKey : ['accData', user?.email],
+        queryFn: async ()=> {
+            const res = await  fetch(`http://localhost:5000/user/${user?.email}`)
+            const data = await res.json()
+            return data;
+        }
+    })
+   
+
+    
+
 
     const googleLogin = ()=>{
         setLoading(true)
@@ -41,7 +57,7 @@ export const AuthContextProvider = ({children}) => {
     useEffect(()=>{
         const unsubscribe =  onAuthStateChanged(auth, currentUser =>{
              setUser(currentUser);
-             console.log('Sate changed -', currentUser);
+            
              setLoading(false)
          })
          return ()=>{
@@ -58,7 +74,7 @@ export const AuthContextProvider = ({children}) => {
      },[])
 
 
-    const authInfo = {setNewTitle,logOut,createUser,updateUser, loginWithemail, user,loading, setUser,abc, googleLogin} 
+    const authInfo = {accData,setAccount,setNewTitle,logOut,createUser,updateUser, loginWithemail, user,loading, setUser,signIn, googleLogin,setLoading} 
 
     return (
         <AuthContext.Provider value={authInfo}>

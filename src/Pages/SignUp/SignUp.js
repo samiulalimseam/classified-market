@@ -1,23 +1,67 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import './SignUp.css';
 import  { AuthContext } from '../../Context/AuthContextProvider';
 
 
 const SignUp = () => {
-    const {createUser,updateUser} = useContext(AuthContext);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const [acTypes,setAcTypes]= useState([]);
+    const [firebaseError, setFirebaseError] = useState({})
+    const {createUser,updateUser,user,setAccount} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    document.title = 'Sign Up- Saveyou';
+
+
+    const inserUserToDb = (user)=>{
+        fetch(`http://localhost:5000/addUser`,{
+            method:"POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        }).then(res=> {
+            console.log(res)
+            console.log('Success')
+            setAccount(user)
+        }).catch(err=>console.log(err))
+        
+    }
+
+    useEffect(()=>{
+        fetch(`http://localhost:5000/actypes`)
+        .then(res=>res.json())
+        .then(data=>setAcTypes(data))
+        .catch(err=>console.log(err))
+    },[])
     
     const handleSignUp = data => {
         createUser(data.email, data.password)
         .then(res=> {
-            console.log(res.user)
+            const userToInsert = {
+                name: data.name,
+                email: res.user?.email,
+                uid: res.user?.uid,
+                phone: data?.phone,
+                acType: data?.acType,
+                img: data?.img
+        }
+        inserUserToDb(userToInsert);
             updateUser({displayName:data.name})
-            .then(res=> console.log(res))
-            .catch(err=> console.error(err))
+            .then(res => {
+                // insert user data to DataBAse
+                
+                setTimeout(()=>{
+                
+                    navigate(from, {replace: true})
+                },3000)
+            })
+            .catch(err=>console.log(err))
         })
-        .catch(err=>console.error(err))
+        .catch(err=>console.log(err))
     }
     return (
         <div className='w-96 md:w-[800px] m-auto'>
@@ -43,12 +87,36 @@ const SignUp = () => {
                                 {/* name input -------------------- */}
                                 <input defaultValue="" {...register("name", { required: true })} type="text" placeholder="name" className="input input-bordered" />
                                 {errors.name && <span className='text-thin text-xs text-red-500'>This field is required</span>}
+                                <label className="label">
+                                    <span className="label-text">Account Type</span>
+                                </label>
+                                <select className='select select-secondary ' {...register("acType")}>
+                                <option value={`Buyer`} disabled selected>Select Account Type</option>
+                                {
+                                    acTypes.map(type => {
+                                        return <option value={type.title}>{type.title}</option>
+                                    })
+                                }
+
+
+                            </select>
+                                {errors.name && <span className='text-thin text-xs text-red-500'>This field is required</span>}
                                 {/* email -------------input------------------------ */}
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input defaultValue="" {...register("email", { required: true })} type="text" placeholder="email" className="input input-bordered" />
                                 {errors.email && <span className='text-thin text-xs text-red-500'>This field is required</span>}
+                                <label className="label">
+                                    <span className="label-text">Phone</span>
+                                </label>
+                                <input defaultValue="" {...register("phone", { required: true })} type="text" placeholder="phone" className="input input-bordered" />
+                                {errors.phone && <span className='text-thin text-xs text-red-500'>This field is required</span>}
+                                <label className="label">
+                                    <span className="label-text">Image URL</span>
+                                </label>
+                                <input defaultValue="" {...register("img", { required: true })} type="text" placeholder="img" className="input input-bordered" />
+                                {errors.img && <span className='text-thin text-xs text-red-500'>This field is required</span>}
                             </div>
                             <div className="form-control">
                                 <label className="label">

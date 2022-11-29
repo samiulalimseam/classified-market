@@ -8,9 +8,9 @@ const CategoryPage = () => {
     const [product,setCardProduct]=useState({});
     const products = useLoaderData();
     return (
-        <div className='container m-auto h-screen'>
+        <div className='container m-auto h-auto'>
             <p className="text-2xl font-extralight text-center">Total {products.length} Products </p>
-            <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-6">
+            <div className="flex flex-col md:flex-row md:justify-start items-center justify-center flex-wrap">
                 {
                     products.map(product=>{
                         return <ProductCard setCardProduct={setCardProduct} key={product._id} product={product}></ProductCard>

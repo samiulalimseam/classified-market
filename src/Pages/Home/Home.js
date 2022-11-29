@@ -1,29 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BsSearch } from "react-icons/bs";
 import { ImLocation } from "react-icons/im";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthContextProvider';
 import BookingModal from '../BookingModal/BookingModal';
 import About from './About';
 import Categories from './Categories';
 import LatestAds from './LatestAds';
 import MidSection from './MidSection';
 const Home = () => {
+    const {setLoading,setNewTitle}=useContext(AuthContext);
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
   const [locations, setLocations] = useState([]);
-
-
-  
+setNewTitle('Home-SaveYou')
+setLoading(true)
+console.log('ok');
   useEffect(() => {
     fetch('http://localhost:5000/products')
       .then(res => res.json())
-      .then(data => setProducts(data))
+      .then(data => {
+        setProducts(data)
+        setLoading(false)
+    })
       .catch(err => console.error(err))
   }, [])
   useEffect(() => {
     fetch('http://localhost:5000/locations')
       .then(res => res.json())
-      .then(data => setLocations(data))
+      .then(data => {
+        setLocations(data)
+        setLoading(false)
+    })
       .catch(err => console.error(err))
   }, [])
 
@@ -31,7 +39,7 @@ const Home = () => {
         const value = document.getElementById('searchInput').value; 
         navigate(`/search/${value}`)
     }
-    document.title = 'Home';
+    
     return (
         <div className='w-full'>
             <div className="hero w-full  min-h-[92px] md:min-h-[186px] bg-accent flex justify-center" >

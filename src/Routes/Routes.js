@@ -4,12 +4,15 @@ import CategoryPage from '../Pages/CategoryPage/CategoryPage';
 import AddProducts from '../Pages/Dashboard/AddProducts/AddProducts';
 import Dashboard from '../Pages/Dashboard/Dashboard';
 import MainDashboard from '../Pages/Dashboard/MainDashboard/MainDashboard';
+import OrderTable from '../Pages/Dashboard/MainDashboard/OrderTable/OrderTable';
 import ProductTable from '../Pages/Dashboard/MainDashboard/ProductTable/ProductTable';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login';
 import Main from '../Pages/Main';
 import SearchPage from '../Pages/SearchPage/SearchPage';
 import SignUp from '../Pages/SignUp/SignUp';
+import AdminRoutes from './AdminRoutes';
+import PrivateRoutes from './PrivateRoutes';
 
  export const router  = createBrowserRouter([
     {
@@ -36,40 +39,39 @@ import SignUp from '../Pages/SignUp/SignUp';
             },
             {
                 path: '/dashboard',
-                element: <Dashboard></Dashboard>,
-                children: [
-                    {
-                        path:'/dashboard/',
-                        element: <MainDashboard></MainDashboard>,
-                        children:[
-                            {
-                                path:'*',
-                                element: <div><p className="text-2xl">Cooming Soon</p></div>
-                            },
-                            {
-                                path:'/dashboard/orders',
-                                element: <div><p>No Orders till now</p></div>
-                            },
-                            {
-                                path:'/dashboard/products',
-                                element: <ProductTable></ProductTable>,
-                                loader: ()=> fetch('http://localhost:5000/products')
-                            },
-                            {
-                                path:'/dashboard/profile',
-                                element: <div><p>No Details till now</p></div>
-                            },
-                        ]
-                    },
-                    {
-                        path:'/dashboard/orders',
-                        element: <MainDashboard></MainDashboard>
-                    },
-                    {
-                        path:'/dashboard/addproduct',
-                        element: <AddProducts></AddProducts>
-                    },
-                ]
+                element: <PrivateRoutes>  <Dashboard></Dashboard></PrivateRoutes>,
+                // children: [
+                //     {
+                //         path:'/dashboard/',
+                //         element: <MainDashboard></MainDashboard>,
+                //         children:[
+                //             {
+                //                 path:'*',
+                //                 element: <div><p className="text-2xl">Cooming Soon</p></div>
+                //             },
+                //             {
+                //                 path:'/dashboard/orders',
+                //                 element: <OrderTable></OrderTable>                        },
+                //             {
+                //                 path:'/dashboard/products',
+                //                 element: <ProductTable></ProductTable>,
+                //                 loader: ()=> fetch('http://localhost:5000/products')
+                //             },
+                //             {
+                //                 path:'/dashboard/profile',
+                //                 element: <div><p>No Details till now</p></div>
+                //             },
+                //         ]
+                //     },
+                //     {
+                //         path:'/dashboard/orders',
+                //         element: <MainDashboard></MainDashboard>
+                //     },
+                //     {
+                //         path:'/dashboard/addproduct',
+                //         element: <AddProducts></AddProducts>
+                //     },
+                // ]
             },
             {
                 path: '/signUp',

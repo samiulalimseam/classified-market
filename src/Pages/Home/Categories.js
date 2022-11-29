@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {GiRunningShoe} from "react-icons/gi";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthContextProvider';
 
 const Categories = () => {
-    // const [cats,setCats] = useState([]);
+    const {setLoading} = useContext(AuthContext)
     const navigate = useNavigate();
+    setLoading(true)
     const {data:cats =[]} = useQuery({
         queryKey:['cats'],
         queryFn: ()=> fetch('http://localhost:5000/categories')
@@ -25,7 +27,7 @@ const Categories = () => {
 
 
     return (
-        <div className='container m-auto md:mt-20'>
+        <div className='duration-1000 container m-auto md:mt-20'>
             <p className="text-lg font-bold m-3">Browse by Categories</p>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 ">
                 {
