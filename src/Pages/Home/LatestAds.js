@@ -8,13 +8,13 @@ import { AuthContext } from '../../Context/AuthContextProvider';
 import LoadingSpinner from '../../Routes/LoadingSpinner';
 
 const LatestAds = ({products}) => {
-  const {user,loading, setLoading}= useContext(AuthContext);
+  const {user,accData}= useContext(AuthContext);
     const [product,setProduct]= useState({});
  
 if(!user?.email){
   return <></>
 }
-if(user?.email){
+if(accData?.acType === 'Buyer'){
 
 
   return (

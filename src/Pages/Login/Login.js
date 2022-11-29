@@ -52,7 +52,8 @@ const Login = () => {
                         uid: result.user?.uid,
                         phone: '',
                         acType: "Buyer",
-                        img: result.user?.photoURL
+                        img: result.user?.photoURL,
+                        verified: 'Not Verified'
                 }
                 console.log('Data=',userToInsert);
                 inserUserToDb(userToInsert);

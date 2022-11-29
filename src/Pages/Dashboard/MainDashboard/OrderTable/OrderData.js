@@ -24,11 +24,11 @@ const OrderData = ({order}) => {
                 <td>
                 {order.seller}
                     <br />
-                    <span className="badge badge-ghost badge-sm">Not Verified</span>
+                    <span className="badge badge-ghost badge-sm">{order.sellerVerified}</span>
                 </td>
                 <td></td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">Price: {order.price} <br /> Sale: {order.salePrice}</button>
+                    <button className="btn btn-secondary btn-xs  text-white">Price: {order.productPrice} <br /> </button>
                 </th>
             </tr>
     );

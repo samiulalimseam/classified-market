@@ -3,19 +3,17 @@ import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContextProvider';
 
 const AdminRoutes = ({children}) => {
-    ;
-    const {user,account} = useContext(AuthContext);
+    
+    const {accData} = useContext(AuthContext);
     
 
 
     
-    if(account?.acType === "Seller"){
+    if(accData?.acType === "Admin"){
         return children
     }
-    if(account?.acType === "Buyer"){
-        return <Navigate to={`/login`} ></Navigate>
-    }
     
+    return <div className='m-auto'><p className='text-4xl text-center'>You are not an Admin!</p></div>
    
 };
 

@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../../../Context/AuthContextProvider';
 import ProductData from './ProductData';
 
 const ProductTable = () => {
-  const products = useLoaderData()
+  const {accData} = useContext(AuthContext);
+   const [products,setProducts] = useState([])
+  useEffect(()=>{
+    fetch(`http://localhost:5000/products/${accData.uid}`)
+    .then(res=>res.json())
+    .then(data=> setProducts(data))
+    .catch(err=> console.log(err))
+  },[])
 
   return (
     <div className=' duration-1000'>

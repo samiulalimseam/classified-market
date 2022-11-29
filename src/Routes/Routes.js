@@ -12,7 +12,9 @@ import Main from '../Pages/Main';
 import SearchPage from '../Pages/SearchPage/SearchPage';
 import SignUp from '../Pages/SignUp/SignUp';
 import AdminRoutes from './AdminRoutes';
+import BuyerRoute from './BuyerRoute';
 import PrivateRoutes from './PrivateRoutes';
+import SellerRoute from './SellerRoute';
 
  export const router  = createBrowserRouter([
     {
@@ -40,38 +42,37 @@ import PrivateRoutes from './PrivateRoutes';
             {
                 path: '/dashboard',
                 element: <PrivateRoutes>  <Dashboard></Dashboard></PrivateRoutes>,
-                // children: [
-                //     {
-                //         path:'/dashboard/',
-                //         element: <MainDashboard></MainDashboard>,
-                //         children:[
-                //             {
-                //                 path:'*',
-                //                 element: <div><p className="text-2xl">Cooming Soon</p></div>
-                //             },
-                //             {
-                //                 path:'/dashboard/orders',
-                //                 element: <OrderTable></OrderTable>                        },
-                //             {
-                //                 path:'/dashboard/products',
-                //                 element: <ProductTable></ProductTable>,
-                //                 loader: ()=> fetch('http://localhost:5000/products')
-                //             },
-                //             {
-                //                 path:'/dashboard/profile',
-                //                 element: <div><p>No Details till now</p></div>
-                //             },
-                //         ]
-                //     },
-                //     {
-                //         path:'/dashboard/orders',
-                //         element: <MainDashboard></MainDashboard>
-                //     },
-                //     {
-                //         path:'/dashboard/addproduct',
-                //         element: <AddProducts></AddProducts>
-                //     },
-                // ]
+                children: [
+                    {
+                        path:'/dashboard/',
+                        element: <MainDashboard></MainDashboard>,
+                        children:[
+                            {
+                                path:'*',
+                                element: <div><p className="text-2xl">Cooming Soon</p></div>
+                            },
+                            {
+                                path:'/dashboard/orders',
+                                element: <BuyerRoute><OrderTable></OrderTable></BuyerRoute>                        },
+                            {
+                                path:'/dashboard/products',
+                                element: <SellerRoute><ProductTable></ProductTable></SellerRoute>
+                            },
+                            {
+                                path:'/dashboard/profile',
+                                element: <div><p>No Details till now</p></div>
+                            },
+                        ]
+                    },
+                    {
+                        path:'/dashboard/orders',
+                        element: <MainDashboard></MainDashboard>
+                    },
+                    {
+                        path:'/dashboard/addproduct',
+                        element: <AddProducts></AddProducts>
+                    },
+                ]
             },
             {
                 path: '/signUp',

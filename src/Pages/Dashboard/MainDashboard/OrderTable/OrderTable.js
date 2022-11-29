@@ -28,7 +28,7 @@ const OrderTable = () => {
                   <input type="checkbox" className="checkbox" />
                 </label>
               </th>
-              <th>Product/Location</th>
+              <th>Order ID</th>
               <th>Seller</th>
               <th>Date Posted</th>
               <th></th>

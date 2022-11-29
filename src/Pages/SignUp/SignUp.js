@@ -47,7 +47,8 @@ const SignUp = () => {
                 uid: res.user?.uid,
                 phone: data?.phone,
                 acType: data?.acType,
-                img: data?.img
+                img: data?.img,
+                verified: 'Not Verified'
         }
         inserUserToDb(userToInsert);
             updateUser({displayName:data.name})
@@ -125,9 +126,7 @@ const SignUp = () => {
                                 {/* password input-------------------------- */}
                                 <input {...register("password", { required: true })} type="password" placeholder="password" className="input input-bordered" />
                                 {errors.password && <span className='text-thin text-xs text-red-500'>This field is required</span>}
-                                <label className="label">
-                                    <Link className="label-text-alt link link-hover">Forgot password?</Link>
-                                </label>
+                                
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">SignUp</button>

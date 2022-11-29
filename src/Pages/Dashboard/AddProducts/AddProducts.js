@@ -44,7 +44,8 @@ const AddProducts = () => {
             datePosted: new Date(),
             location: data.location,
             purchaseDate: data.purchaseDate,
-            condition: data.condition
+            condition: data.condition,
+            verified: user?.verified,
         }
         fetch('http://localhost:5000/addproduct', {
             method: 'POST',

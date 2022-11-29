@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContextProvider';
 import ProductCard from '../ProductCard/ProductCard';
 
 const BookingModal = ({product}) => {
-    const {user} = useContext(AuthContext);
-
+    const {user,accData} = useContext(AuthContext);
+    const navigate = useNavigate();
     const addNewOrder=(order)=>{
 
     }
@@ -24,7 +26,8 @@ const BookingModal = ({product}) => {
             meetLocation: form.location.value,
             buyerPhone: form.phone.value,
             buyerEmail: form.email.value,
-            buyerName: form.name.value
+            buyerName: form.name.value,
+            sellerVerified: product.verified
 
         }
         fetch('http://localhost:5000/addorder', {
@@ -33,7 +36,11 @@ const BookingModal = ({product}) => {
                 "content-type": "application/json"
             },
             body: JSON.stringify(order)
-        }).then(res=>console.log(res))
+        }).then(()=>{
+            setTimeout(() => {
+                navigate('/dashboard/orders')
+            }, 2000);
+        })
         .catch(err=>console.error(err))
 
     }
@@ -48,7 +55,15 @@ const BookingModal = ({product}) => {
   <div className="modal-box relative">
     <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
     <h3 className="text-lg font-bold">Request  Seller</h3>
-    <form onSubmit={handleSubmit} className='flex flex-col' >
+    <form onSubmit={(e)=>{
+        e.preventDefault()
+        if(accData.acType === 'Seller'){
+            toast('Sellers are not allowed to order!')
+        }
+        else{
+            handleSubmit(e)
+        }
+    }} className='flex flex-col' >
         <div className="flex flex-col border p-2">
         <p className="text-sm">Product: {product?.title}</p>
         <p className="text-xs">Price: {product?.salePrice}</p>
