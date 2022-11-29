@@ -65,6 +65,12 @@ const Login = () => {
         })
         .catch(err=>console.log(err))
     }
+    if(user?.email){
+        navigate('/dashboard')
+    }
+    else{
+
+    
     return (
         <div className='w-96 md:w-[800px] m-auto'>
 
@@ -110,6 +116,7 @@ const Login = () => {
             </div>
         </div>
     );
+}
 };
 
 export default Login;

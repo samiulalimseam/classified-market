@@ -3,9 +3,12 @@ import { createBrowserRouter, Link } from 'react-router-dom';
 import CategoryPage from '../Pages/CategoryPage/CategoryPage';
 import AddProducts from '../Pages/Dashboard/AddProducts/AddProducts';
 import Dashboard from '../Pages/Dashboard/Dashboard';
+import BuyersTable from '../Pages/Dashboard/MainDashboard/BuyersTable/BuyersTable';
 import MainDashboard from '../Pages/Dashboard/MainDashboard/MainDashboard';
 import OrderTable from '../Pages/Dashboard/MainDashboard/OrderTable/OrderTable';
 import ProductTable from '../Pages/Dashboard/MainDashboard/ProductTable/ProductTable';
+import SellersTable from '../Pages/Dashboard/MainDashboard/SellersTable/SellersTable';
+import Profile from '../Pages/Dashboard/Profile';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login';
 import Main from '../Pages/Main';
@@ -36,7 +39,7 @@ import SellerRoute from './SellerRoute';
             },
             {
                 path: '/category/:id',
-                element: <CategoryPage></CategoryPage>,
+                element:<PrivateRoutes> <CategoryPage></CategoryPage></PrivateRoutes>,
                 loader: ({params})=> fetch(`http://localhost:5000/category/${params.id}`)
             },
             {
@@ -59,8 +62,16 @@ import SellerRoute from './SellerRoute';
                                 element: <SellerRoute><ProductTable></ProductTable></SellerRoute>
                             },
                             {
+                                path:'/dashboard/buyers',
+                                element: <AdminRoutes><BuyersTable></BuyersTable></AdminRoutes>
+                            },
+                            {
+                                path:'/dashboard/sellers',
+                                element: <AdminRoutes><SellersTable></SellersTable></AdminRoutes>
+                            },
+                            {
                                 path:'/dashboard/profile',
-                                element: <div><p>No Details till now</p></div>
+                                element: <Profile></Profile>
                             },
                         ]
                     },

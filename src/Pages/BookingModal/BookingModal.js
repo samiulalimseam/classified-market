@@ -57,8 +57,8 @@ const BookingModal = ({product}) => {
     <h3 className="text-lg font-bold">Request  Seller</h3>
     <form onSubmit={(e)=>{
         e.preventDefault()
-        if(accData.acType === 'Seller'){
-            toast('Sellers are not allowed to order!')
+        if(accData.acType === 'Seller' || accData.acType === 'Admin'){
+            toast(`Sorry, ${accData.acType}s are not allowed to order products!`)
         }
         else{
             handleSubmit(e)

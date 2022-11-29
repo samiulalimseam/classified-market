@@ -10,7 +10,7 @@ const AdminRoutes = ({children}) => {
 
     
     if(accData?.acType === "Admin"){
-        return children
+        return children;
     }
     
     return <div className='m-auto'><p className='text-4xl text-center'>You are not an Admin!</p></div>

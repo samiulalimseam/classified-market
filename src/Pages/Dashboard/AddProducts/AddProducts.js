@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthContextProvider';
 
 const AddProducts = () => {
-    const { user } = useContext(AuthContext);
+    const { user,accData } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [cats, setCats] = useState([]);
     const [locations, setLocations] = useState([]);
     const [conditions, setConditions] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch('http://localhost:5000/categories')
@@ -45,7 +47,7 @@ const AddProducts = () => {
             location: data.location,
             purchaseDate: data.purchaseDate,
             condition: data.condition,
-            verified: user?.verified,
+            verified: accData?.verified,
         }
         fetch('http://localhost:5000/addproduct', {
             method: 'POST',
@@ -54,8 +56,11 @@ const AddProducts = () => {
             },
             body: JSON.stringify(product)
         })
-            .then(res => {
-                console.log(res);
+            .then(() => {
+                toast('Product Addedd')
+                setTimeout(() => {
+                    navigate('/dashboard/products')
+                }, 1);
             })
 
         console.log(data);

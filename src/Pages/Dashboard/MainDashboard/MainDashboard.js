@@ -22,7 +22,7 @@ console.log(accData.uid);
     }, [])
 
     return (
-        <div className='container m-auto h-auto p-3'>
+        <div className='container m-auto min-h-screen p-3'>
             <div className="stats flex md:flex-row flex-col duration-1000 shadow w-full mb-2">
             {
                 accData?.acType === 'Buyer' &&
@@ -49,13 +49,13 @@ console.log(accData.uid);
                 </div>
             }
             
-            {
+            {/* {
                 accData?.acType === 'Admin' &&
                 <div className="flex justify-center">
                     <Link className='m-2'>Sellers</Link>
                 <Link className='m-2'>Buyers</Link>
                 </div>
-            }
+            } */}
             
                 
 
