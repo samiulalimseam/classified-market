@@ -7,7 +7,7 @@ const ProductTable = () => {
   const {accData} = useContext(AuthContext);
    const [products,setProducts] = useState([])
   useEffect(()=>{
-    fetch(`http://localhost:5000/products/${accData.uid}`)
+    fetch(`https://ass-12-server-tau.vercel.app/products/${accData.uid}`)
     .then(res=>res.json())
     .then(data=> setProducts(data))
     .catch(err=> console.log(err))

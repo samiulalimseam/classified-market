@@ -9,13 +9,13 @@ const MainDashboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${accData.uid}`)
+        fetch(`https://ass-12-server-tau.vercel.app/products/${accData.uid}`)
             .then(res => res.json())
             .then(data => setProducts(data))
             .catch(err => console.error(err))
     }, [])
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${user.email}`)
+        fetch(`https://ass-12-server-tau.vercel.app/orders/${user.email}`)
             .then(res => res.json())
             .then(data => setOrders(data))
             .catch(err => console.error(err))

@@ -12,7 +12,7 @@ const EditModal = ({ seller }) => {
             sellerDisable: document.getElementById('status').value,
         }
         console.log(updatedData);
-        fetch(`http://localhost:5000/updateSeller/${seller.email}`,{
+        fetch(`https://ass-12-server-tau.vercel.app/updateSeller/${seller.email}`,{
             method: "POST",
             headers:{
                 "content-type": "application/json"

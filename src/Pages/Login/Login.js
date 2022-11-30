@@ -15,7 +15,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     const inserUserToDb = (user)=>{
-        fetch(`http://localhost:5000/addUser`,{
+        fetch(`https://ass-12-server-tau.vercel.app/addUser`,{
             method:"POST",
             headers: {
                 "content-type": "application/json"

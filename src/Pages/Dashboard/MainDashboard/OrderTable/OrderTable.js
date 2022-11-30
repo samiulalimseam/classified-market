@@ -11,7 +11,7 @@ const OrderTable = () => {
 
     
     useEffect(()=>{
-      fetch(`http://localhost:5000/orders/${user.email}`)
+      fetch(`https://ass-12-server-tau.vercel.app/orders/${user.email}`)
       .then(res=>res.json())
       .then(data=> setOrders(data))
       .catch(err=>console.log(err))

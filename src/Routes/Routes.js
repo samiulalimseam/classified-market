@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <PrivateRoutes> <CategoryPage></CategoryPage></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://ass-12-server-tau.vercel.app/category/${params.id}`)
             },
             {
                 path: '/dashboard',

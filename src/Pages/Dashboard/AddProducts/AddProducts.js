@@ -13,19 +13,19 @@ const AddProducts = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch('http://localhost:5000/categories')
+        fetch('https://ass-12-server-tau.vercel.app/categories')
             .then(res => res.json())
             .then(data => setCats(data))
             .catch(err => console.error(err))
     }, [])
     useEffect(() => {
-        fetch('http://localhost:5000/locations')
+        fetch('https://ass-12-server-tau.vercel.app/locations')
             .then(res => res.json())
             .then(data => setLocations(data))
             .catch(err => console.error(err))
     }, [])
     useEffect(() => {
-        fetch('http://localhost:5000/conditions')
+        fetch('https://ass-12-server-tau.vercel.app/conditions')
             .then(res => res.json())
             .then(data => setConditions(data))
             .catch(err => console.error(err))
@@ -50,7 +50,7 @@ const AddProducts = () => {
             verified: accData?.verified,
             sellerDisabled: false
         }
-        fetch('http://localhost:5000/addproduct', {
+        fetch('https://ass-12-server-tau.vercel.app/addproduct', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

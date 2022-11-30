@@ -10,12 +10,12 @@ const Categories = () => {
     setLoading(true)
     const {data:cats =[]} = useQuery({
         queryKey:['cats'],
-        queryFn: ()=> fetch('http://localhost:5000/categories')
+        queryFn: ()=> fetch('https://ass-12-server-tau.vercel.app/categories')
         .then(res=>res.json())
     })
     const {data:products =[]} = useQuery({
         queryKey:['products'],
-        queryFn: ()=> fetch('http://localhost:5000/products')
+        queryFn: ()=> fetch('https://ass-12-server-tau.vercel.app/products')
         .then(res=>res.json())
     })
     // -------------------------------------------------------

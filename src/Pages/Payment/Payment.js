@@ -13,7 +13,7 @@ const Payment = () => {
     
     const {data:order ={}} = useQuery({
         queryKey:['order', orderId],
-        queryFn: ()=> fetch(`http://localhost:5000/order/${orderId}`)
+        queryFn: ()=> fetch(`https://ass-12-server-tau.vercel.app/order/${orderId}`)
         .then(res=>res.json())
     })
 
@@ -26,7 +26,7 @@ const Payment = () => {
             <p>Meet location: {order.meetLocation}</p>
             <div className='card card-body border max-w-lg min-h-[290px]'>
             <Elements stripe={stripePromise}>
-      <CheckOutForm />
+      <CheckOutForm order={order} />
     </Elements>
             </div>
         </div>

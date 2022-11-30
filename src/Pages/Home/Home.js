@@ -19,7 +19,7 @@ setNewTitle('Home-SaveYou')
 setLoading(true)
 
   // useEffect(() => {
-  //   fetch('http://localhost:5000/products')
+  //   fetch('https://ass-12-server-tau.vercel.app/products')
   //     .then(res => res.json())
   //     .then(data => {
   //       setProducts(data)
@@ -29,12 +29,12 @@ setLoading(true)
   // }, [])
 
   useEffect( ()=> {
-    axios.get('http://localhost:5000/ads')
+    axios.get('https://ass-12-server-tau.vercel.app/ads')
     .then(data => setProducts(data.data))
   }, [])
 
   useEffect(() => {
-    fetch('http://localhost:5000/locations')
+    fetch('https://ass-12-server-tau.vercel.app/locations')
       .then(res => res.json())
       .then(data => {
         setLocations(data)

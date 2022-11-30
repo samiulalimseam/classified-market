@@ -17,7 +17,7 @@ const SignUp = () => {
 
 
     const inserUserToDb = (user)=>{
-        fetch(`http://localhost:5000/addUser`,{
+        fetch(`https://ass-12-server-tau.vercel.app/addUser`,{
             method:"POST",
             headers: {
                 "content-type": "application/json"
@@ -32,7 +32,7 @@ const SignUp = () => {
     }
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/actypes`)
+        fetch(`https://ass-12-server-tau.vercel.app/actypes`)
         .then(res=>res.json())
         .then(data=>setAcTypes(data))
         .catch(err=>console.log(err))

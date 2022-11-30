@@ -9,7 +9,7 @@ const BuyersTable = () => {
   const { data: buyers = [] } = useQuery({
     queryKey: ['buyers', buyerQuery],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users/${buyerQuery}`)
+      const res = await fetch(`https://ass-12-server-tau.vercel.app/users/${buyerQuery}`)
       const data = await res.json()
       return data;
     }
@@ -17,7 +17,7 @@ const BuyersTable = () => {
   const { data: orders = [] } = useQuery({
     queryKey: ['orders', orderQuery],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/orders/${orderQuery}`)
+      const res = await fetch(`https://ass-12-server-tau.vercel.app/orders/${orderQuery}`)
       const data = await res.json()
       return data;
     }

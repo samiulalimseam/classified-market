@@ -5,7 +5,7 @@ const SearchPage = () => {
     const searchTerm = useLoaderData();
     const [products,setProducts] = useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:5000/search/${searchTerm}`)
+        fetch(`https://ass-12-server-tau.vercel.app/search/${searchTerm}`)
         .then(res=>res.json())
         .then(data=> setProducts(data))
         .catch(err=>console.error(err))

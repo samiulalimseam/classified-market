@@ -33,7 +33,7 @@ const BookingModal = ({product}) => {
             
 
         }
-        fetch('http://localhost:5000/addorder', {
+        fetch('https://ass-12-server-tau.vercel.app/addorder', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
