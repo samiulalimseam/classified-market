@@ -4,9 +4,10 @@ import { AuthContext } from '../../../../Context/AuthContextProvider';
 import OrderData from './OrderData';
 
 const OrderTable = () => {
-  const {user,account} = useContext(AuthContext);
+  const {user,account,setLoading} = useContext(AuthContext);
     const [orders, setOrders] = useState([]);
-    console.log(account?.acType);
+    
+
 
     
     useEffect(()=>{

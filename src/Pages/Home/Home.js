@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { BsSearch } from "react-icons/bs";
 import { ImLocation } from "react-icons/im";
@@ -15,16 +16,22 @@ const Home = () => {
   const [locations, setLocations] = useState([]);
 setNewTitle('Home-SaveYou')
 setLoading(true)
-console.log('ok');
-  useEffect(() => {
-    fetch('http://localhost:5000/products')
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data)
-        setLoading(false)
-    })
-      .catch(err => console.error(err))
+
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/products')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setProducts(data)
+  //       setLoading(false)
+  //   })
+  //     .catch(err => console.error(err))
+  // }, [])
+
+  useEffect( ()=> {
+    axios.get('http://localhost:5000/products')
+    .then(data => setProducts(data.data))
   }, [])
+
   useEffect(() => {
     fetch('http://localhost:5000/locations')
       .then(res => res.json())

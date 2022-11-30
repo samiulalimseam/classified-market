@@ -75,13 +75,10 @@ import SellerRoute from './SellerRoute';
                             },
                         ]
                     },
-                    {
-                        path:'/dashboard/orders',
-                        element: <MainDashboard></MainDashboard>
-                    },
+                    
                     {
                         path:'/dashboard/addproduct',
-                        element: <AddProducts></AddProducts>
+                        element: <SellerRoute> <AddProducts></AddProducts></SellerRoute>
                     },
                 ]
             },

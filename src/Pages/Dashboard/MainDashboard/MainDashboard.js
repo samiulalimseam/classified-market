@@ -7,7 +7,7 @@ const MainDashboard = () => {
     const [products, setProducts] = useState([]);
     const [Orders, setOrders] = useState([]);
     const navigate = useNavigate();
-console.log(accData.uid);
+
     useEffect(() => {
         fetch(`http://localhost:5000/products/${accData.uid}`)
             .then(res => res.json())

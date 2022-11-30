@@ -1,13 +1,47 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import BuyersData from './BuyersData';
 
 const BuyersTable = () => {
-    return (
-        <div className=' duration-1000'>
+  const buyerQuery = 'Buyer'
+  const orderQuery = 'all'
+
+  const { data: buyers = [] } = useQuery({
+    queryKey: ['buyers', buyerQuery],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/users/${buyerQuery}`)
+      const data = await res.json()
+      return data;
+    }
+  })
+  const { data: orders = [] } = useQuery({
+    queryKey: ['orders', orderQuery],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/orders/${orderQuery}`)
+      const data = await res.json()
+      return data;
+    }
+  })
+  return (
+    <div className=' duration-1000'>
       <div className="overflow-x-auto w-full">
+        <h2 className="text-center">
+        
+        </h2>
         <table className="table w-full">
 
           <thead>
+            <tr className='' >
+              
+              <th className='bg-secondary'></th>
+              <th className='bg-secondary'><span className="text-xl font-light p-3  text-white">Buyers: {buyers.length}</span></th>
+              <th className='bg-secondary'><span className="text-xl font-light p-3  text-white">Orders: {orders.length}</span></th>
+              <th className='bg-secondary'></th>
+              <th className='bg-secondary'></th>
+              
+              
+              <th className='bg-secondary'></th>
+            </tr>
             <tr>
               <th>
                 <label>
@@ -17,7 +51,7 @@ const BuyersTable = () => {
               <th>Name</th>
               <th>Orders</th>
               
-              <th>Verification</th>
+              <th>Email</th>
               <th>Action</th>
               <th></th>
             </tr>
@@ -25,8 +59,8 @@ const BuyersTable = () => {
           <tbody>
 
             {
-              [1,1,1,1,1].map(product => {
-                return <BuyersData key={product.id} product={product}></BuyersData>
+              buyers?.map(buyer => {
+                return <BuyersData key={buyer._id} orders={orders} buyer={buyer}></BuyersData>
               })
             }
 
@@ -38,7 +72,7 @@ const BuyersTable = () => {
       </div>
 
     </div>
-    );
+  );
 };
 
 export default BuyersTable;
