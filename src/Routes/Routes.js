@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, Link } from 'react-router-dom';
+import Blogs from '../Pages/Blogs/Blogs';
 import CategoryPage from '../Pages/CategoryPage/CategoryPage';
 import AddProducts from '../Pages/Dashboard/AddProducts/AddProducts';
 import Dashboard from '../Pages/Dashboard/Dashboard';
@@ -19,9 +20,9 @@ import BuyerRoute from './BuyerRoute';
 import PrivateRoutes from './PrivateRoutes';
 import SellerRoute from './SellerRoute';
 
- export const router  = createBrowserRouter([
+export const router = createBrowserRouter([
     {
-        path:'/',
+        path: '/',
         element: <Main></Main>,
         children: [
             {
@@ -31,60 +32,65 @@ import SellerRoute from './SellerRoute';
             {
                 path: '/search/:id',
                 element: <SearchPage></SearchPage>,
-                loader: ({params})=> params.id
+                loader: ({ params }) => params.id
             },
             {
                 path: '/login',
                 element: <Login></Login>
             },
             {
+                path: '/blogs',
+                element: <Blogs></Blogs>
+            },
+            {
                 path: '/category/:id',
-                element:<PrivateRoutes> <CategoryPage></CategoryPage></PrivateRoutes>,
-                loader: ({params})=> fetch(`http://localhost:5000/category/${params.id}`)
+                element: <PrivateRoutes> <CategoryPage></CategoryPage></PrivateRoutes>,
+                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
             },
             {
                 path: '/dashboard',
                 element: <PrivateRoutes>  <Dashboard></Dashboard></PrivateRoutes>,
                 children: [
                     {
-                        path:'/dashboard/',
+                        path: '/dashboard/',
                         element: <MainDashboard></MainDashboard>,
-                        children:[
+                        children: [
                             {
-                                path:'*',
+                                path: '*',
                                 element: <div><p className="text-2xl">Cooming Soon</p></div>
                             },
                             {
-                                path:'/dashboard/orders',
-                                element: <BuyerRoute><OrderTable></OrderTable></BuyerRoute>                        },
+                                path: '/dashboard/orders',
+                                element: <BuyerRoute><OrderTable></OrderTable></BuyerRoute>
+                            },
                             {
-                                path:'/dashboard/products',
+                                path: '/dashboard/products',
                                 element: <SellerRoute><ProductTable></ProductTable></SellerRoute>
                             },
                             {
-                                path:'/dashboard/buyers',
+                                path: '/dashboard/buyers',
                                 element: <AdminRoutes><BuyersTable></BuyersTable></AdminRoutes>
                             },
                             {
-                                path:'/dashboard/sellers',
+                                path: '/dashboard/sellers',
                                 element: <AdminRoutes><SellersTable></SellersTable></AdminRoutes>
                             },
                             {
-                                path:'/dashboard/profile',
+                                path: '/dashboard/profile',
                                 element: <Profile></Profile>
                             },
                         ]
                     },
-                    
+
                     {
-                        path:'/dashboard/addproduct',
+                        path: '/dashboard/addproduct',
                         element: <SellerRoute> <AddProducts></AddProducts></SellerRoute>
                     },
                 ]
             },
             {
                 path: '/signUp',
-                element:<SignUp></SignUp>
+                element: <SignUp></SignUp>
             },
             {
                 path: '*',
@@ -92,5 +98,5 @@ import SellerRoute from './SellerRoute';
             }
         ]
     }
- ]);
- 
+]);
+

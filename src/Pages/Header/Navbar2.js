@@ -15,6 +15,7 @@ const Navbar2 = ({ children }) => {
         {!user?.uid && <li><Link to={'/login'}>Login</Link></li>}
         {user?.uid && <li><Link to={`/`} onClick={handleSignout}>SignOut</Link></li>}
         <li> <Link to={`/dashboard`} >Dashboard</Link> </li>
+        <li> <Link to={`/blogs`} >Blog</Link> </li>
         <Link to={`/`} className="btn w-36 md:btn-md btn-sm btn-primary">Post Your Ad</Link>
 
     </>
