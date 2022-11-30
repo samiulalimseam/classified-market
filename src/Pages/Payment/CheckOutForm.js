@@ -6,7 +6,7 @@ const CheckOutForm = ({order}) => {
     const stripe = useStripe();
     const elements = useElements();
     const {productPrice} = order;
-
+    const data2= '';
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -17,7 +17,7 @@ const CheckOutForm = ({order}) => {
         if (card == null) {
             return;
         }
-// 
+// asdasdada
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
