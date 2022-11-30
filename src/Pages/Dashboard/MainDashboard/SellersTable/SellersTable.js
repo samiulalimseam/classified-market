@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import EditModal from '../../../EditModal/EditModal';
 import SellersData from './SellersData';
 
 const SellersTable = () => {
+  const [sellerToSend, setSeller] = useState({})
   const query = 'Seller'
 
   const { data: sellers = [] } = useQuery({
@@ -57,15 +59,15 @@ const SellersTable = () => {
 
             {
               sellers?.map(seller => {
-                return <SellersData key={seller._id} products={products} seller={seller}></SellersData>
+                return <SellersData setSeller={setSeller} key={seller._id} products={products} seller={seller}></SellersData>
               })
             }
-
           </tbody>
 
 
 
         </table>
+<EditModal seller={sellerToSend}></EditModal>
       </div>
 
     </div>

@@ -48,6 +48,7 @@ const AddProducts = () => {
             purchaseDate: data.purchaseDate,
             condition: data.condition,
             verified: accData?.verified,
+            sellerDisabled: false
         }
         fetch('http://localhost:5000/addproduct', {
             method: 'POST',

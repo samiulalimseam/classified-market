@@ -13,6 +13,7 @@ import Profile from '../Pages/Dashboard/Profile';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login';
 import Main from '../Pages/Main';
+import Payment from '../Pages/Payment/Payment';
 import SearchPage from '../Pages/SearchPage/SearchPage';
 import SignUp from '../Pages/SignUp/SignUp';
 import AdminRoutes from './AdminRoutes';
@@ -62,6 +63,11 @@ export const router = createBrowserRouter([
                             {
                                 path: '/dashboard/orders',
                                 element: <BuyerRoute><OrderTable></OrderTable></BuyerRoute>
+                            },
+                            {
+                                path: '/dashboard/payment/:id',
+                                element: <BuyerRoute><Payment></Payment></BuyerRoute>,
+                                loader: ({params})=> params.id
                             },
                             {
                                 path: '/dashboard/products',

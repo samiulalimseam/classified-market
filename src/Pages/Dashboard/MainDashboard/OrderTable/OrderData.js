@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const OrderData = ({order}) => {
     return (
@@ -26,10 +27,21 @@ const OrderData = ({order}) => {
                     <br />
                     <span className="badge badge-ghost badge-sm">{order.sellerVerified}</span>
                 </td>
-                <td></td>
-                <th>
-                    <button className="btn btn-secondary btn-xs  text-white">Price: {order.productPrice} <br /> </button>
-                </th>
+                
+                <td>
+                    <button className=" text-black"> BDT {order.productPrice}৳ <br /> </button>
+                </td>
+                <td>
+                    <button className=" text-black"> {order.status} <br /> </button>
+                </td>
+                <td>
+                    <div className="flex flex-col md:flex-row">
+
+                    <Link to={`/dashboard/payment/${order._id}`} onClick={()=> console.log('clicked')} className={`rounded bg-primary p-1 m-1 w-16 text-center text-black ${order?.paid && ' btn-disabled  bg-green-600 text-white'}`}>{order?.paid && 'Paid'} {!order?.paid && 'Pay'} <br /> </Link>
+                    <button className="rounded bg-red-500 p-1 m-1 w-16 text-center text-white">Cancel <br /> </button>
+                    
+                    </div>
+                </td>
             </tr>
     );
 };

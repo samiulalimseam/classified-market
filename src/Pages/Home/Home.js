@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { BsSearch } from "react-icons/bs";
 import { ImLocation } from "react-icons/im";
+import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContextProvider';
 import BookingModal from '../BookingModal/BookingModal';
@@ -28,7 +29,7 @@ setLoading(true)
   // }, [])
 
   useEffect( ()=> {
-    axios.get('http://localhost:5000/products')
+    axios.get('http://localhost:5000/ads')
     .then(data => setProducts(data.data))
   }, [])
 
@@ -65,8 +66,8 @@ setLoading(true)
             </div>
             <Categories></Categories>
             
-            <MidSection></MidSection>
             <LatestAds products={products}></LatestAds>
+            <MidSection></MidSection>
             <div className="divider"><span className='text-2xl font-thin'>About Saveyou </span></div>
             <About></About>
            

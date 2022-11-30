@@ -8,7 +8,12 @@ const SellerRoute = ({children}) => {
 
     
     if(accData?.acType === "Seller"){
-        return children
+        if(accData?.sellerDisable === false){
+
+            return children
+        } else if(accData?.sellerDisable === true){
+            return <div><p className="text-center text-4xl">Your seller account has been disabled</p></div>
+        }
     }
     
     return <div className='m-auto'><p className='text-4xl text-center'>You are not a Seller!</p></div>

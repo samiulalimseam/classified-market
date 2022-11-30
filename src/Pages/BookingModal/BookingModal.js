@@ -27,7 +27,10 @@ const BookingModal = ({product}) => {
             buyerPhone: form.phone.value,
             buyerEmail: form.email.value,
             buyerName: form.name.value,
-            sellerVerified: product.verified
+            sellerVerified: product.verified,
+            paid: false,
+            status: 'pending',
+            
 
         }
         fetch('http://localhost:5000/addorder', {
@@ -37,6 +40,7 @@ const BookingModal = ({product}) => {
             },
             body: JSON.stringify(order)
         }).then(()=>{
+            toast('Booked Successfully!')
             setTimeout(() => {
                 navigate('/dashboard/orders')
             }, 2000);

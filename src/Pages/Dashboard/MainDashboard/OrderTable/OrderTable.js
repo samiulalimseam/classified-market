@@ -31,7 +31,8 @@ const OrderTable = () => {
               </th>
               <th>Order ID</th>
               <th>Seller</th>
-              <th>Date Posted</th>
+              <th>Price</th>
+              <th>Action</th>
               <th></th>
             </tr>
           </thead>
