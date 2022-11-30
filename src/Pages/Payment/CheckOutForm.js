@@ -6,7 +6,7 @@ const CheckOutForm = ({order}) => {
     const stripe = useStripe();
     const elements = useElements();
     const {productPrice} = order;
-    const data2= '';
+   
 
     const handleSubmit = async (event) => {
         event.preventDefault();
