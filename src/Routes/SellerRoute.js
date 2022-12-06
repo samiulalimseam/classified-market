@@ -12,7 +12,7 @@ const SellerRoute = ({children}) => {
 
             return children
         } else if(accData?.sellerDisable === true){
-            return <div><p className="text-center text-4xl">Your seller account has been disabled</p></div>
+        return <div><p className="text-center text-4xl">Your seller account has been disabled</p></div>
         }
     }
     
